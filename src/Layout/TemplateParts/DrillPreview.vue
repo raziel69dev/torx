@@ -1,9 +1,14 @@
 <template>
   <div class="drill-wrapper">
-    <div class="slogan"></div>
     <div class="drill-content" v-if="$props.model" >
+      <div class="slogan">
+        <div class="rect"></div>
+        <span>и все закрутится</span>
+      </div>
+
       <div class="drill-name">
         {{ $props.model.name }}
+
 
       </div>
       <div class="drill-features">
@@ -20,33 +25,92 @@
 
         <div class="model-name">
           {{ $props.model.model }}
+
         </div>
 
+      </div>
+      <div class="drill-advanced" style="margin-top: 20px;">
+        <div class="advanced" v-for="advanced of $props.model.advanced">
+          <img :src="advanced.icon" alt="">
+          {{ advanced.name }}
+        </div>
+      </div>
+
+      <div class="buttons" style="margin-top: 20px; display:flex; gap: 20px;">
+        <ButtonRed @buttonClicked="addToCart($props.model)">
+          купить
+        </ButtonRed>
+        <ButtonGray>
+          посмотреть характеристики
+        </ButtonGray>
       </div>
 
     </div>
     <div class="drill-image">
-      <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vexels.com%2Fmerch%2Fpng%2Fpreview%2F&psig=AOvVaw0H01c2_bGnLA69aTFdWetF&ust=1728634615604000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLCssPOvg4kDFQAAAAAdAAAAABAE" alt="">
+      <img :src="$props.model.image" alt="">
+
+
+      <div class="colors">
+        <div class="color" v-for="color of $props.model.colors">
+          <span class="round" :style="`background-color: ${color.color}`"></span>
+          {{ color.where }}
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="op5">
+      <the-blur-round :width="500"/>
     </div>
   </div>
 </template>
 <script>
+import theBlurRound from "@/Layout/TemplateParts/TheBlurRound.vue";
+import ButtonRed from "@/Layout/TemplateParts/ButtonRed.vue";
+import ButtonGray from "@/Layout/TemplateParts/ButtonGray.vue";
+import {cart} from "@/js/cart.js";
+
+
 export default {
   name: 'DrillPreview',
   props: {
     model: null
+  },
+  components: {
+    ButtonGray,
+    ButtonRed,
+    theBlurRound
+  },
+  methods: {
+    addToCart(model) {
+
+      cart.push(model)
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.op5 {
+  opacity: .8;
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+}
 .drill-wrapper {
   display: flex;
+  width: 80%;
   align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 .drill-content {
   color: #FFFFFF;
-  width: 50%;
+  width: 55%;
+  position: relative;
+  z-index: 2;
+
   .drill-name {
     color: #FFF;
     font-family: "Gotham Pro";
@@ -59,6 +123,7 @@ export default {
   .drill-features {
     display: flex;
     gap: 10px;
+    position: relative;
 
 
     .model-name {
@@ -67,7 +132,9 @@ export default {
       font-family: "Gotham Pro";
       font-size: 120px;
       position: absolute;
-      left: 550px;
+      left: 450px;
+      white-space: nowrap;
+      word-break: keep-all;
       margin-top: -20px;
       font-style: italic;
       font-weight: 900;
@@ -139,6 +206,70 @@ export default {
         transition: .3s ease;
       }
     }
+  }
+
+}
+.drill-image {
+  position: relative;
+  width: 45%;
+
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  z-index: 2222;
+
+
+  img {
+    margin-left: 30px;
+  }
+
+  .colors {
+    position: absolute;
+    bottom: 20px;
+    cursor: default;
+    right: 0;
+    .color {
+      width: 80px;
+      color: #BEBEBE;
+      font-family: "Gotham Pro";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+
+      span {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+        display: block;
+        border-radius: 20px;
+      }
+
+    }
+  }
+
+}
+
+.slogan {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .rect {
+    width: 50%;
+    height: 1px;
+    background: #F00;
+  }
+  span {
+    color: #FFF;
+    text-align: center;
+    font-family: "Gotham Pro";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 }
 </style>

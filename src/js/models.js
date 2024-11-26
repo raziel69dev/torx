@@ -6,6 +6,10 @@ import gear from '@/components/icons/gear.svg'
 import speed from '@/components/icons/speed.svg'
 import battery from '@/components/icons/battery.svg'
 
+import cs12 from '@/assets/images/drills/cs12.png'
+import cd12 from '@/assets/images/drills/cd12.png'
+import cid21 from '@/assets/images/drills/cid21.png'
+
 export const models = reactive([{
     model: 'CS-12',
     name: 'АККУМУЛЯТОРНЫЙ ШУРУПОВЕРТ',
@@ -38,6 +42,7 @@ export const models = reactive([{
         name: 'Электронный тормоз двигателя',
         icon: stop
     }],
+    image: cs12,
     colors: [
         {
             color: 'red',
