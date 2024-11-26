@@ -119,6 +119,7 @@ export default {
     font-weight: 700;
     line-height: normal;
     margin-bottom: 20px;
+    height: 170px;
   }
   .drill-features {
     display: flex;
@@ -212,7 +213,7 @@ export default {
 .drill-image {
   position: relative;
   width: 45%;
-
+  height: 500px;
   display: flex;
   align-items: end;
   justify-content: center;
