@@ -37,7 +37,7 @@
       </div>
 
       <div class="buttons" style="margin-top: 20px; display:flex; gap: 20px;">
-        <ButtonRed @buttonClicked="addToCart($props.model)">
+        <ButtonRed @buttonClicked="popup.show = true">
           купить
         </ButtonRed>
         <ButtonGray>
@@ -51,7 +51,7 @@
 
 
       <div class="colors">
-        <div class="color" v-for="color of $props.model.colors">
+        <div class="color" v-for="color of $props.model.colors" :key="color">
           <span class="round" :style="`background-color: ${color.color}`"></span>
           {{ color.where }}
 
@@ -63,32 +63,32 @@
     <div class="op5">
       <the-blur-round :width="500"/>
     </div>
+
+    <the-popup v-if="popup.show" @closePopup="popup.show = false">
+      BUY
+    </the-popup>
   </div>
 </template>
-<script>
+<script setup>
 import theBlurRound from "@/Layout/TemplateParts/TheBlurRound.vue";
 import ButtonRed from "@/Layout/TemplateParts/ButtonRed.vue";
 import ButtonGray from "@/Layout/TemplateParts/ButtonGray.vue";
 import {cart} from "@/js/cart.js";
+import ThePopup from "@/Layout/Popups/ThePopup.vue";
+import { reactive } from "vue";
 
-
-export default {
-  name: 'DrillPreview',
-  props: {
-    model: null
-  },
-  components: {
-    ButtonGray,
-    ButtonRed,
-    theBlurRound
-  },
-  methods: {
-    addToCart(model) {
-
-      cart.push(model)
-    }
-  }
+const props = defineProps({
+  model: null
+})
+function addToCart(model) {
+  cart.push(model)
 }
+
+const popup = reactive({
+  show: false
+})
+
+
 </script>
 
 <style lang="scss" scoped>

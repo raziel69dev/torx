@@ -1,48 +1,42 @@
 <template>
   <div class="models-wrapper">
     <h2>модели шуруповертов</h2>
-
-    <div class="tabs" v-if="this.model">
+    <div class="tabs" v-if="activeModel.model">
       <div class="tabs-header">
         <span class="model-name"
-              :class="{active: model.name === this.model.name}"
+              :class="{active: activeModel.name === model.name}"
               v-for="model of models"
+              :key="model"
               @click="setModel(model)"
         >
           {{ model.model }}
         </span>
       </div>
-      <div class="tabs-body">
-        <DrillPreview :model="this.model" />
-      </div>
+      <transition-group class="tabs-body" tag="div">
+        <DrillPreview :model="activeModel.model" />
+      </transition-group>
+
     </div>
 
   </div>
 </template>
-<script>
-import {models} from "@/js/models.js";
+<script setup>
 import DrillPreview from "@/Layout/TemplateParts/DrillPreview.vue";
+import { onMounted, reactive } from "vue";
+import { models } from "@/js/models";
 
-export default {
-  name: 'Models',
-  components: {DrillPreview},
-  data() {
-    return {
-      models,
-      model: null
-    }
-  },
-  methods: {
-    setModel(model) {
-      this.model = model
-      //swap models code here
-      console.log(model)
-    }
-  },
-  mounted() {
-    this.setModel(models[0])
-  }
+const activeModel = reactive({
+  model: null
+})
+
+function setModel(model) {
+  activeModel.model = model
+  //swap models code here
+  console.log(model, activeModel)
 }
+onMounted(() => {
+  setModel(models[0])
+})
 </script>
 <style lang="scss" scoped>
 h2 {
@@ -50,6 +44,15 @@ h2 {
 }
 .models-wrapper {
   margin-top: 150px;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 .tabs {
   .tabs-header {
@@ -72,6 +75,7 @@ h2 {
       line-height: normal;
       border-bottom: 3px solid transparent;
       transition: .3s ease;
+      cursor: pointer;
 
       &.active {
         border-bottom-color: #FF0000;
