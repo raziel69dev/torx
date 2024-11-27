@@ -4,7 +4,7 @@
     <div class="slider-wrapper noselect" >
       <div class="slider" ref="slider" :style="styles">
 
-        <div class="slide" @drag="onDrag" v-for="slide of slides">
+        <div class="slide" @drag="onDrag" v-for="slide of slides" :key="slide">
           <img :src="slide" alt="">
         </div>
 
@@ -22,7 +22,7 @@
         </svg>
       </div>
       <div class="dots">
-        <div class="dot" v-for="(dot, index) of slides.length" :class="{active: index === this.step}">
+        <div class="dot" v-for="(dot, index) of slides.length" :class="{active: index === this.step}" :key="index">
         </div>
       </div>
     </div>
@@ -31,12 +31,13 @@
 </template>
 
 <script>
-import slide from '@/assets/images/slide1.jpg'
+import slide1 from '@/assets/images/slide1.jpg'
+import slide2 from '@/assets/images/slide2.jpg'
 export default {
   name: "BaseSlider.vue",
   data () {
     return {
-      slides: [slide,slide,slide],
+      slides: [slide1,slide2],
       step: 0,
       styles: ``
     }

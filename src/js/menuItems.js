@@ -13,13 +13,14 @@ export const menuItems = reactive([
         name: 'о TORX',
         href: '#about',
         active: false
-    },{
-        name: 'где купить',
-        href: '#where-to-buy',
-        active: false
-    },{
-        name: 'контакты',
-        href: '#contacts',
-        active: false
-    }
+    },
 ])
+// {
+//     name: 'где купить',
+//     href: '#where-to-buy',
+//     active: false
+// },{
+//     name: 'контакты',
+//     href: '#contacts',
+//     active: false
+// }

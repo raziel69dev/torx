@@ -1,8 +1,15 @@
 import {reactive} from "vue";
 
-export const cart = reactive([])
+export const cart = reactive({
+    items: []
+})
 
 export function addToCart(model) {
-    localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') ) : null
+    cart.items.push(model)
+    localStorage.setItem('cart', JSON.stringify(cart))
+}
 
+export function removeFromCart(index) {
+    cart.items.splice(index)
+    localStorage.setItem('cart', JSON.stringify(cart))
 }

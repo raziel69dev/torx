@@ -3,11 +3,12 @@
     <h2>модели шуруповертов</h2>
     <div class="tabs" v-if="activeModel.model">
       <div class="tabs-header">
-        <span class="model-name"
-              :class="{active: activeModel.name === model.name}"
-              v-for="model of models"
-              :key="model"
-              @click="setModel(model)"
+        <span
+          class="model-name"
+          :class="{ active: activeModel.name === model.name }"
+          v-for="model of models"
+          :key="model"
+          @click="setModel(model)"
         >
           {{ model.model }}
         </span>
@@ -15,9 +16,7 @@
       <transition-group class="tabs-body" tag="div">
         <DrillPreview :model="activeModel.model" />
       </transition-group>
-
     </div>
-
   </div>
 </template>
 <script setup>
@@ -26,17 +25,17 @@ import { onMounted, reactive } from "vue";
 import { models } from "@/js/models";
 
 const activeModel = reactive({
-  model: null
-})
+  model: null,
+});
 
 function setModel(model) {
-  activeModel.model = model
+  activeModel.model = model;
   //swap models code here
-  console.log(model, activeModel)
+  console.log(model, activeModel);
 }
 onMounted(() => {
-  setModel(models[0])
-})
+  setModel(models[0]);
+});
 </script>
 <style lang="scss" scoped>
 h2 {
@@ -56,7 +55,7 @@ h2 {
 }
 .tabs {
   .tabs-header {
-    color: #FFFFFF;
+    color: #ffffff;
     width: 100%;
     display: flex;
     align-items: center;
@@ -66,7 +65,7 @@ h2 {
     .model-name {
       position: relative;
       top: 2px;
-      color: #FFF;
+      color: #fff;
       text-align: center;
       font-family: "Gotham Pro";
       font-size: 36px;
@@ -74,17 +73,22 @@ h2 {
       font-weight: 700;
       line-height: normal;
       border-bottom: 3px solid transparent;
-      transition: .3s ease;
+      transition: 0.3s ease;
       cursor: pointer;
 
       &.active {
-        border-bottom-color: #FF0000;
+        border-bottom-color: #ff0000;
       }
     }
   }
   .tabs-body {
     margin-top: 40px;
+  }
+}
 
+@media screen and (max-width: 500px) {
+  h2 {
+    font-size: 30px;
   }
 }
 </style>

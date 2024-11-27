@@ -4,6 +4,14 @@ body {
   min-height: 100vh;
   font-family: 'Gotham Pro', SansSerif, Arial, serif;
   overflow-x:  hidden;
+  padding-bottom: 60px;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    width: 100vw;
+    overflow-x: hidden;
+  }
 }
 
 .btn {

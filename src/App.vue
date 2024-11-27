@@ -1,22 +1,26 @@
 <script setup>
-import {RouterView} from 'vue-router'
-import {defineAsyncComponent} from "vue";
+import { RouterView } from "vue-router";
+import { defineAsyncComponent, onMounted } from "vue";
 import PromoText from "@/Layout/TemplateParts/PromoText.vue";
 import ScrollBox from "@/Layout/TemplateParts/ScrollBox.vue";
 import Models from "@/Layout/TemplateParts/Models.vue";
+import BaseHeader from "./Layout/TemplateParts/BaseHeader.vue";
+import TheBlurRound from "@/Layout/TemplateParts/TheBlurRound.vue";
+import Presentation from "./Layout/TemplateParts/Presentation.vue";
+import WhereToBuy from "@/Layout/TemplateParts/WhereToBuy.vue";
+import BaseSlider from "@/Layout/TemplateParts/BaseSlider.vue";
 
+onMounted(() => {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
 
-const BaseHeader = defineAsyncComponent({
-  loader: () => import('@/Layout/TemplateParts/BaseHeader.vue')
-})
-
-const Round = defineAsyncComponent({
-  loader: () => import('@/Layout/TemplateParts/TheBlurRound.vue')
-})
-
-const Slider = defineAsyncComponent({
-  loader: () => import('@/Layout/TemplateParts/BaseSlider.vue')
-})
+      document.querySelector(this.getAttribute("href")).scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+  });
+});
 </script>
 
 <template>
@@ -25,19 +29,18 @@ const Slider = defineAsyncComponent({
       <BaseHeader />
     </header>
     <section style="position: relative">
-      <Slider id="promo" />
-      <Round :width="600" />
+      <BaseSlider id="promo" />
+      <TheBlurRound :width="600" />
       <PromoText />
       <ScrollBox />
     </section>
     <section>
-      <Models />
+      <Models id="models" />
+      <Presentation id="about" />
+      <WhereToBuy />
+      <TheBlurRound :width="100" />
     </section>
-
   </main>
-
-
-
 
   <RouterView />
 </template>

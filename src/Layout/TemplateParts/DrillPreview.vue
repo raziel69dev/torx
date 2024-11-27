@@ -1,6 +1,6 @@
 <template>
   <div class="drill-wrapper">
-    <div class="drill-content" v-if="$props.model" >
+    <div class="drill-content" v-if="$props.model">
       <div class="slogan">
         <div class="rect"></div>
         <span>и все закрутится</span>
@@ -8,64 +8,62 @@
 
       <div class="drill-name">
         {{ $props.model.name }}
-
-
       </div>
       <div class="drill-features">
         <div class="feature" v-for="feature of $props.model.features">
           <div class="icon">
-            <img :src=" feature.icon " alt="">
+            <img :src="feature.icon" alt="" />
           </div>
 
           <span class="tech">{{ feature.tech }}</span>
           <span class="name">{{ feature.name }}</span>
-
-
         </div>
 
         <div class="model-name">
           {{ $props.model.model }}
-
         </div>
-
       </div>
-      <div class="drill-advanced" style="margin-top: 20px;">
-        <div class="advanced" v-for="advanced of $props.model.advanced">
-          <img :src="advanced.icon" alt="">
+      <div class="drill-advanced" style="margin-top: 20px">
+        <div class="advanced" v-for="advanced of $props.model.advanced" :key="advanced">
+          <img :src="advanced.icon" alt="" />
           {{ advanced.name }}
         </div>
       </div>
 
-      <div class="buttons" style="margin-top: 20px; display:flex; gap: 20px;">
-        <ButtonRed @buttonClicked="popup.show = true">
+      <div class="buttons" style="margin-top: 20px; display: flex; gap: 20px">
+        <ButtonRed
+          @buttonClicked="(popup.show = true), (popup.component = shallowRef(BuyModel))"
+        >
           купить
         </ButtonRed>
-        <ButtonGray>
+        <ButtonGray
+          @click="
+            (popup.show = true),
+              (popup.content = $props.model),
+              (popup.component = shallowRef(ModelInfo))
+          "
+        >
           посмотреть характеристики
         </ButtonGray>
       </div>
-
     </div>
     <div class="drill-image">
-      <img :src="$props.model.image" alt="">
-
+      <img :src="$props.model.image" alt="" />
 
       <div class="colors">
         <div class="color" v-for="color of $props.model.colors" :key="color">
           <span class="round" :style="`background-color: ${color.color}`"></span>
           {{ color.where }}
-
         </div>
       </div>
-
     </div>
 
     <div class="op5">
-      <the-blur-round :width="500"/>
+      <the-blur-round :width="500" />
     </div>
 
     <the-popup v-if="popup.show" @closePopup="popup.show = false">
-      BUY
+      <component :is="popup.component" :data="(popup.content = $props.model)" />
     </the-popup>
   </div>
 </template>
@@ -73,27 +71,30 @@
 import theBlurRound from "@/Layout/TemplateParts/TheBlurRound.vue";
 import ButtonRed from "@/Layout/TemplateParts/ButtonRed.vue";
 import ButtonGray from "@/Layout/TemplateParts/ButtonGray.vue";
-import {cart} from "@/js/cart.js";
+import { cart } from "@/js/cart.js";
 import ThePopup from "@/Layout/Popups/ThePopup.vue";
-import { reactive } from "vue";
+import { reactive, shallowRef } from "vue";
+
+import ModelInfo from "@/Layout/Popups/ModelInfo.vue";
+import BuyModel from "../Popups/BuyModel.vue";
 
 const props = defineProps({
-  model: null
-})
+  model: null,
+});
 function addToCart(model) {
-  cart.push(model)
+  cart.push(model);
 }
 
 const popup = reactive({
-  show: false
-})
-
-
+  show: false,
+  content: null,
+  component: null,
+});
 </script>
 
 <style lang="scss" scoped>
 .op5 {
-  opacity: .8;
+  opacity: 0.8;
   position: absolute;
   z-index: 0;
   left: 50%;
@@ -106,13 +107,13 @@ const popup = reactive({
   margin: 0 auto;
 }
 .drill-content {
-  color: #FFFFFF;
+  color: #ffffff;
   width: 55%;
   position: relative;
   z-index: 2;
 
   .drill-name {
-    color: #FFF;
+    color: #fff;
     font-family: "Gotham Pro";
     font-size: 46px;
     font-style: italic;
@@ -125,7 +126,6 @@ const popup = reactive({
     display: flex;
     gap: 10px;
     position: relative;
-
 
     .model-name {
       -webkit-text-stroke: 1px #fff;
@@ -145,7 +145,7 @@ const popup = reactive({
       overflow: hidden;
       border-radius: 30px;
       border: 2px solid #919191;
-      background: rgba(0, 0, 0, 0.30);
+      background: rgba(0, 0, 0, 0.3);
       width: 100px;
       height: 100px;
       display: flex;
@@ -154,20 +154,20 @@ const popup = reactive({
       flex-wrap: wrap;
       position: relative;
       cursor: default;
-      transition: .3s ease;
+      transition: 0.3s ease;
 
       &:hover {
-        background-color: #FF0000;
+        background-color: #ff0000;
         .icon {
           img {
             filter: invert(30%);
           }
         }
-        .tech, .name {
+        .tech,
+        .name {
           color: #efefef;
         }
       }
-
 
       .icon {
         width: 50px;
@@ -176,11 +176,10 @@ const popup = reactive({
         right: -10px;
         top: -10px;
 
-
         img {
           width: 100%;
           height: 100%;
-          transition: .3s ease;
+          transition: 0.3s ease;
         }
       }
 
@@ -193,8 +192,7 @@ const popup = reactive({
         font-weight: 700;
         color: #cbcbcb;
         width: 100%;
-        transition: .3s ease;
-
+        transition: 0.3s ease;
       }
       .name {
         margin-top: -80px;
@@ -204,11 +202,10 @@ const popup = reactive({
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
-        transition: .3s ease;
+        transition: 0.3s ease;
       }
     }
   }
-
 }
 .drill-image {
   position: relative;
@@ -218,7 +215,6 @@ const popup = reactive({
   align-items: end;
   justify-content: center;
   z-index: 2222;
-
 
   img {
     margin-left: 30px;
@@ -231,7 +227,7 @@ const popup = reactive({
     right: 0;
     .color {
       width: 80px;
-      color: #BEBEBE;
+      color: #bebebe;
       font-family: "Gotham Pro";
       font-size: 14px;
       font-style: normal;
@@ -245,10 +241,8 @@ const popup = reactive({
         display: block;
         border-radius: 20px;
       }
-
     }
   }
-
 }
 
 .slogan {
@@ -261,16 +255,53 @@ const popup = reactive({
   .rect {
     width: 50%;
     height: 1px;
-    background: #F00;
+    background: #f00;
   }
   span {
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-family: "Gotham Pro";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .tabs .tabs-header .model-name {
+    font-size: 24px;
+  }
+}
+.drill-wrapper {
+  flex-wrap: wrap;
+}
+.drill-content {
+  width: 100%;
+  .drill-name {
+    font-size: 24px;
+    height: 100%;
+  }
+  .drill-features {
+    .model-name {
+      display: none;
+    }
+    .feature {
+      height: 70px;
+      border-radius: 10px;
+      .tech {
+        font-size: 28px;
+      }
+    }
+  }
+}
+.drill-image {
+  width: 100%;
+  .colors {
+    right: -30px;
+  }
+  img {
+    width: 100%;
   }
 }
 </style>

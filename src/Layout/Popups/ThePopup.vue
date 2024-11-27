@@ -8,19 +8,19 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from "vue";
 
-const props = defineProps({})
-const emits = defineEmits(['closePopup'])
+const props = defineProps({});
+const emits = defineEmits(["closePopup"]);
 
 onMounted(() => {
-  document.body.style.height = '100vh'
-  document.body.style.overflowY = 'hidden'
-})
+  document.body.style.height = "100vh";
+  document.body.style.overflowY = "hidden";
+});
 onUnmounted(() => {
-  document.body.style.height = 'auto'
-  document.body.style.overflowY = 'auto'
-})
+  document.body.style.height = "auto";
+  document.body.style.overflowY = "auto";
+});
 </script>
 
 <style scoped lang="scss">
@@ -30,7 +30,7 @@ onUnmounted(() => {
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,.3);
+  background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
   z-index: 5000;
 

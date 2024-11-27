@@ -73,12 +73,12 @@ export const models = reactive([{
             icon: voltage
         },
         power: {
-            tech: 22,
+            tech: 25,
             name: 'Нм',
             icon: gear
         },
         spin: {
-            tech: 600,
+            tech: 1350,
             name: 'об / мин',
             icon: speed
         },
@@ -96,12 +96,12 @@ export const models = reactive([{
         icon: stop
     }],
     specified: {
-        nm: '22Нм',
+        nm: '25Нм',
         speeds: '18+1',
         power: '12В',
         battery: 'Li-Ion',
         flash: 'да',
-        spin: '0-600',
+        spin: '0-1350',
         batteryCount: '1',
         motorType: 'щеточный',
         headType: 'бесключевой , быстрозажиной',
@@ -124,17 +124,17 @@ export const models = reactive([{
     name: 'УДАРНАЯ ДРЕЛЬ-ШУРУПОВЕРТ АККУМУЛЯТОРНАЯ',
     features: {
         voltage: {
-            tech: 12,
+            tech: 21,
             name: 'вольт',
             icon: voltage
         },
         power: {
-            tech: 22,
+            tech: 35,
             name: 'Нм',
             icon: gear
         },
         spin: {
-            tech: 600,
+            tech: 1550,
             name: 'об / мин',
             icon: speed
         },
@@ -152,16 +152,16 @@ export const models = reactive([{
         icon: stop
     }],
     specified: {
-        nm: '22Нм',
-        speeds: '18+1',
-        power: '12В',
+        nm: '25Нм',
+        speeds: '25+1',
+        power: '21В',
         battery: 'Li-Ion',
         flash: 'да',
-        spin: '0-600',
+        spin: '0-1550',
         batteryCount: '1',
         motorType: 'щеточный',
         headType: 'бесключевой , быстрозажиной',
-        drill: 'нет',
+        drill: 'да',
         reverse: 'да'
     },
     image: cid21,
