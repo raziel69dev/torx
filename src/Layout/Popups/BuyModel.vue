@@ -4,7 +4,7 @@
     <div class="model-photo">
       <img :src="data.image" alt="" />
     </div>
-    <button-red @click="addToCart(data)"> купить </button-red>
+    <button-red @click="addToCart(data), emits('closePopup', true)"> купить </button-red>
 
     <the-blur-round :width="500" style="opacity: 0.5" />
   </div>
@@ -18,6 +18,7 @@ import TheBlurRound from "../TemplateParts/TheBlurRound.vue";
 const props = defineProps({
   data: null,
 });
+const emits = defineEmits(["closePopup"]);
 </script>
 
 <style lang="scss" scoped>

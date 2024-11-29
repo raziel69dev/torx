@@ -62,6 +62,8 @@ export default {
 .promo-text {
   display: flex;
   align-items: end;
+  width: 100%;
+  box-sizing: border-box;
 
   .promo-text_description {
     width: 75%;
@@ -83,10 +85,12 @@ export default {
   }
   .promo-spinner {
     position: absolute;
-    left: 60%;
+    left: 50%;
     top: 15%;
-    width: 1000px;
-    height: 1000px;
+    width: 500px;
+    height: 500px;
+    border-radius: 500px;
+
     overflow: hidden;
     display: flex;
     align-items: center;

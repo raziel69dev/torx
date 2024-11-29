@@ -10,7 +10,7 @@
         {{ $props.model.name }}
       </div>
       <div class="drill-features">
-        <div class="feature" v-for="feature of $props.model.features">
+        <div class="feature" v-for="feature of $props.model.features" :key="feature">
           <div class="icon">
             <img :src="feature.icon" alt="" />
           </div>
@@ -59,11 +59,15 @@
     </div>
 
     <div class="op5">
-      <the-blur-round :width="500" />
+      <the-blur-round :width="320" />
     </div>
 
     <the-popup v-if="popup.show" @closePopup="popup.show = false">
-      <component :is="popup.component" :data="(popup.content = $props.model)" />
+      <component
+        :is="popup.component"
+        :data="(popup.content = $props.model)"
+        @closePopup="popup.show = false"
+      />
     </the-popup>
   </div>
 </template>
@@ -210,7 +214,7 @@ const popup = reactive({
 .drill-image {
   position: relative;
   width: 45%;
-  height: 500px;
+  max-height: 500px;
   display: flex;
   align-items: end;
   justify-content: center;
@@ -224,12 +228,13 @@ const popup = reactive({
     position: absolute;
     bottom: 20px;
     cursor: default;
-    right: 0;
+    right: 20px;
+
     .color {
       width: 80px;
       color: #bebebe;
       font-family: "Gotham Pro";
-      font-size: 14px;
+      font-size: 12px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -272,36 +277,43 @@ const popup = reactive({
   .tabs .tabs-header .model-name {
     font-size: 24px;
   }
-}
-.drill-wrapper {
-  flex-wrap: wrap;
-}
-.drill-content {
-  width: 100%;
-  .drill-name {
-    font-size: 24px;
-    height: 100%;
+
+  .drill-wrapper {
+    flex-wrap: wrap;
   }
-  .drill-features {
-    .model-name {
-      display: none;
+  .drill-content {
+    width: 100%;
+    .drill-name {
+      font-size: 24px;
+      height: 100%;
     }
-    .feature {
-      height: 70px;
-      border-radius: 10px;
-      .tech {
-        font-size: 28px;
+    .drill-features {
+      .model-name {
+        display: none;
+      }
+      .feature {
+        height: 70px;
+        border-radius: 10px;
+        .name {
+          font-size: 10px;
+          margin-top: -65px;
+        }
+        .tech {
+          font-size: 28px;
+        }
       }
     }
   }
-}
-.drill-image {
-  width: 100%;
-  .colors {
-    right: -30px;
-  }
-  img {
+  .drill-image {
     width: 100%;
+
+    .colors {
+      left: 3%;
+    }
+    img {
+      margin-left: 0;
+      width: 100%;
+    }
   }
 }
 </style>

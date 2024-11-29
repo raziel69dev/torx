@@ -10,6 +10,6 @@ export function addToCart(model) {
 }
 
 export function removeFromCart(index) {
-    cart.items.splice(index)
+    cart.items.splice(index, 1)
     localStorage.setItem('cart', JSON.stringify(cart))
 }

@@ -83,6 +83,7 @@ export default {
   padding-right: 10px;
   align-items: center;
   gap: 25px;
+  box-sizing: border-box;
   position: relative;
   .counter {
     position: absolute;

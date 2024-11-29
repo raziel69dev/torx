@@ -12,7 +12,12 @@
         <div class="item-photo">
           <img :src="item.image" alt="" />
         </div>
-        <button-gray @click="removeFromCart(index)"> Убрать </button-gray>
+        <button-gray
+          @click="removeFromCart(index)"
+          style="cursor: pointer; font-size: 12px"
+        >
+          Убрать
+        </button-gray>
       </div>
     </div>
     <div class="buttons">

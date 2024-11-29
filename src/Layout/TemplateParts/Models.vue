@@ -5,7 +5,7 @@
       <div class="tabs-header">
         <span
           class="model-name"
-          :class="{ active: activeModel.name === model.name }"
+          :class="{ active: activeModel.model.name === model.name }"
           v-for="model of models"
           :key="model"
           @click="setModel(model)"
@@ -21,7 +21,7 @@
 </template>
 <script setup>
 import DrillPreview from "@/Layout/TemplateParts/DrillPreview.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { models } from "@/js/models";
 
 const activeModel = reactive({
@@ -43,6 +43,8 @@ h2 {
 }
 .models-wrapper {
   margin-top: 150px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .v-enter-active,
 .v-leave-active {
@@ -68,7 +70,7 @@ h2 {
       color: #fff;
       text-align: center;
       font-family: "Gotham Pro";
-      font-size: 36px;
+      font-size: 26px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
@@ -88,7 +90,7 @@ h2 {
 
 @media screen and (max-width: 500px) {
   h2 {
-    font-size: 30px;
+    font-size: 22px;
   }
 }
 </style>

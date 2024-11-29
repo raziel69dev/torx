@@ -44,7 +44,7 @@
         </svg>
       </a>
     </div>
-    <the-blur-round :width="500" />
+    <the-blur-round :width="400" />
   </div>
 </template>
 <script setup>
@@ -59,13 +59,13 @@ import torxPres from "@/assets/images/presentation.pdf";
   margin-top: 240px;
   box-sizing: border-box;
   padding: 30px;
-  width: 90%;
-  margin-left: 5%;
+  width: 100%;
   border-radius: 30px;
   background: #000;
   z-index: 100;
   position: relative;
   margin-bottom: 30px;
+  overflow: hidden;
 
   .text {
     width: 70%;
