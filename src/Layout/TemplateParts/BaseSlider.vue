@@ -57,13 +57,14 @@
 </template>
 
 <script>
-import slide1 from "@/assets/images/slide1.jpg";
-import slide2 from "@/assets/images/slide2.jpg";
+import slide2 from "@/assets/images/slide1.jpg";
+import slide3 from "@/assets/images/slide2.jpg";
+import slide1 from "@/assets/images/new_old_torx.jpg";
 export default {
   name: "BaseSlider.vue",
   data() {
     return {
-      slides: [slide1, slide2],
+      slides: [slide1, slide2, slide3],
       step: 0,
       styles: ``,
     };
@@ -118,7 +119,7 @@ export default {
 }
 .slider {
   position: relative;
-  z-index: 1;
+  z-index: 5;
   max-height: 100%;
   display: flex;
   transition: 0.3s ease;
@@ -140,6 +141,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 5;
   .arrows {
     svg {
       cursor: pointer;

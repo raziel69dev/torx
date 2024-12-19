@@ -5,7 +5,19 @@ export const cart = reactive({
 })
 
 export function addToCart(model) {
-    cart.items.push(model)
+    const findModel = cart.items.find(item => item.name === model.name) || null
+    
+    if (findModel) {
+        if (findModel.count) {
+            findModel.count += 1
+        } else {
+            findModel.count = 1
+        }
+
+    } else {
+        cart.items.push(model)
+    }
+    
     localStorage.setItem('cart', JSON.stringify(cart))
 }
 

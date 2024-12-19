@@ -3,7 +3,7 @@
     <div class="text">
       <div class="heading">посмотрите ознакомительную презентацию</div>
       <div class="buttons">
-        <button-red>
+        <button-red :href="torxPres">
           посмотреть презентацию
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,6 @@
             />
           </svg>
         </button-red>
-        <button-gray> посмотреть модели шуруповертов </button-gray>
       </div>
     </div>
     <div class="preview">
@@ -48,11 +47,13 @@
   </div>
 </template>
 <script setup>
+import router from "@/router";
 import ButtonGray from "./ButtonGray.vue";
 import ButtonRed from "./ButtonRed.vue";
 import TheBlurRound from "./TheBlurRound.vue";
 import presPreview from "@/assets/images/pres_preview.png";
 import torxPres from "@/assets/images/presentation.pdf";
+import { useRouter } from "vue-router";
 </script>
 <style lang="scss" scoped>
 .presentation {
@@ -65,7 +66,6 @@ import torxPres from "@/assets/images/presentation.pdf";
   z-index: 100;
   position: relative;
   margin-bottom: 30px;
-  overflow: hidden;
 
   .text {
     width: 70%;
@@ -89,7 +89,7 @@ import torxPres from "@/assets/images/presentation.pdf";
     right: 10%;
     position: absolute;
     float: right;
-    top: -20%;
+    top: -50%;
     z-index: 30;
 
     img {

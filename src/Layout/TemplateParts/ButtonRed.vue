@@ -1,20 +1,23 @@
 <template>
-  <button class="btn button-buy" @click="$emit('buttonClicked')">
+  <button v-if="!props.href" class="btn button-buy" @click="$emit('buttonClicked')">
     <slot />
   </button>
+
+  <a v-else class="btn button-buy" :href="href" target="_blank">
+    <slot />
+  </a>
 </template>
-<script>
-export default {
-  name: 'ButtonRed'
-}
+<script setup>
+const props = defineProps({
+  href: null,
+});
 </script>
 
 <style lang="scss" scoped>
-
 .button-buy {
-  background: #F00;
+  background: #f00;
   padding: 10px 40px;
-  color: #FFF;
+  color: #fff;
   font-family: "Gotham Pro";
   font-size: 16px;
   font-style: normal;

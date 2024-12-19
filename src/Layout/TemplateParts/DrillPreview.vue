@@ -191,7 +191,7 @@ const popup = reactive({
         text-align: center;
         font-family: "Gotham Pro";
         font-size: 36px;
-        line-height: 3.5;
+        margin-top: 30px;
         font-style: normal;
         font-weight: 700;
         color: #cbcbcb;
@@ -199,7 +199,6 @@ const popup = reactive({
         transition: 0.3s ease;
       }
       .name {
-        margin-top: -80px;
         color: #838383;
         text-align: center;
         font-family: "Gotham Pro";
@@ -296,10 +295,10 @@ const popup = reactive({
         border-radius: 10px;
         .name {
           font-size: 10px;
-          margin-top: -65px;
+          margin-top: -5px;
         }
         .tech {
-          font-size: 28px;
+          font-size: 22px;
         }
       }
     }

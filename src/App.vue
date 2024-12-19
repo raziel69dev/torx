@@ -93,6 +93,7 @@ onMounted(() => {
   border-radius: 500px;
   padding: 10px 10px;
   cursor: pointer;
+  z-index: 100;
 
   .counter {
     position: absolute;

@@ -1,6 +1,8 @@
 <template>
   <div class="cart">
-    <div class="cart-heading">Корзина пуста</div>
+    <div class="cart-heading">
+      Корзина <span v-if="cart.items.length <= 0">пуста</span>
+    </div>
     <div class="cart-body">
       <div
         class="cart-item"
@@ -12,6 +14,7 @@
         <div class="item-photo">
           <img :src="item.image" alt="" />
         </div>
+        <div class="counter">x{{ item.count || 1 }}</div>
         <button-gray
           @click="removeFromCart(index)"
           style="cursor: pointer; font-size: 12px"
@@ -21,8 +24,13 @@
       </div>
     </div>
     <div class="buttons">
-      <button-red v-show="cart.items.length > 0"> Заказать </button-red>
-      <button-gray v-show="cart.items.length > 0"> Продолжить покупки </button-gray>
+      <button-red
+        v-show="cart.items.length > 0"
+        :href="`https://ptech.ru`"
+        style="width: 100%"
+      >
+        Заказать
+      </button-red>
     </div>
   </div>
 </template>
@@ -57,6 +65,7 @@ import ButtonRed from "../TemplateParts/ButtonRed.vue";
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
+    position: relative;
 
     .cart-item {
       width: 30%;
@@ -72,6 +81,35 @@ import ButtonRed from "../TemplateParts/ButtonRed.vue";
       .item-photo {
         img {
           width: 100%;
+        }
+      }
+      .counter {
+        background-color: red;
+        display: flex;
+        width: 30px;
+        align-items: center;
+        justify-content: center;
+        height: 30px;
+        border-radius: 20px;
+        position: absolute;
+        top: 160px;
+        margin-left: 50px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .cart {
+    .cart-heading {
+      font-size: 20px;
+    }
+    .cart-body {
+      .cart-item {
+        width: 45%;
+        box-sizing: border-box;
+        .item-name {
+          font-size: 12px;
         }
       }
     }

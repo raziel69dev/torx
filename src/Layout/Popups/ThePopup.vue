@@ -47,4 +47,13 @@ onUnmounted(() => {
     padding: 30px;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .popup {
+    .popup-body {
+      width: 100%;
+      max-width: 90vw;
+    }
+  }
+}
 </style>

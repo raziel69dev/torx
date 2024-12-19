@@ -4,7 +4,12 @@
     <div class="model-photo">
       <img :src="data.image" alt="" />
     </div>
-    <button-red @click="addToCart(data), emits('closePopup', true)"> купить </button-red>
+    <button-red
+      @click="addToCart(data), emits('closePopup', true)"
+      style="position: relative; z-index: 2"
+    >
+      купить
+    </button-red>
 
     <the-blur-round :width="500" style="opacity: 0.5" />
   </div>
@@ -59,6 +64,22 @@ const emits = defineEmits(["closePopup"]);
 
   &:hover {
     opacity: 0.8;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .model-to-buy {
+    .model-name {
+      font-size: 16px;
+    }
+    .model-photo {
+      width: 100%;
+
+      img {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+    }
   }
 }
 </style>

@@ -40,6 +40,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 h2 {
   text-align: center;
+  margin-bottom: 10px;
 }
 .models-wrapper {
   margin-top: 150px;
