@@ -57,14 +57,13 @@
 </template>
 
 <script>
-import slide2 from "@/assets/images/slide1.jpg";
-import slide3 from "@/assets/images/slide2.jpg";
-import slide1 from "@/assets/images/new_old_torx.jpg";
+import slide1 from "@/assets/images/slide2.jpg";
+import slide2 from "@/assets/images/new_old_torx.jpg";
 export default {
   name: "BaseSlider.vue",
   data() {
     return {
-      slides: [slide1, slide2, slide3],
+      slides: [slide1, slide2],
       step: 0,
       styles: ``,
     };

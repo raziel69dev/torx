@@ -31,11 +31,7 @@
       </div>
 
       <div class="buttons" style="margin-top: 20px; display: flex; gap: 20px">
-        <ButtonRed
-          @buttonClicked="(popup.show = true), (popup.component = shallowRef(BuyModel))"
-        >
-          купить
-        </ButtonRed>
+        <ButtonRed @buttonClicked="buyDrill($props.model)"> купить </ButtonRed>
         <ButtonGray
           @click="
             (popup.show = true),
@@ -78,22 +74,42 @@ import ButtonGray from "@/Layout/TemplateParts/ButtonGray.vue";
 import { cart } from "@/js/cart.js";
 import ThePopup from "@/Layout/Popups/ThePopup.vue";
 import { reactive, shallowRef } from "vue";
-
 import ModelInfo from "@/Layout/Popups/ModelInfo.vue";
 import BuyModel from "../Popups/BuyModel.vue";
+
+import { useNotification } from "@kyvg/vue3-notification";
+
+const { notify } = useNotification();
+
+notify({
+  title: "Authorization",
+  text: "You have been logged in!",
+});
 
 const props = defineProps({
   model: null,
 });
-function addToCart(model) {
-  cart.push(model);
-}
 
 const popup = reactive({
   show: false,
   content: null,
   component: null,
 });
+
+const buyDrill = (model) => {
+  // if (localStorage.getItem("userCart")) {
+  //   try {
+  //     parseInt(cart.items.find((item) => item.model === model.model).count++);
+  //     localStorage.setItem("userCart", JSON.stringify(cart.items));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // } else {
+  //   model.count = 1;
+  //   cart.items.push(model);
+  //   localStorage.setItem("userCart", JSON.stringify(cart.items));
+  // }
+};
 </script>
 
 <style lang="scss" scoped>

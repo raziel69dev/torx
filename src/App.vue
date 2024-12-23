@@ -69,6 +69,8 @@ onMounted(() => {
     <the-popup v-if="popup.show" @closePopup="popup.show = false">
       <cart />
     </the-popup>
+
+    <notifications position="bottom right" />
   </main>
 
   <RouterView />

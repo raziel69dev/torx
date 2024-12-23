@@ -1,12 +1,12 @@
 <template>
   <div class="link">
-    <a
-      :href="$props.link.href"
+    <router-link
+      :to="$props.link.href"
       :class="{ active: $props.link.active }"
       @click="onActiveSet($props.link.name)"
     >
       {{ $props.link.name }}
-    </a>
+    </router-link>
     <span class="border" v-show="$props.link.active"></span>
   </div>
 </template>
