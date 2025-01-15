@@ -12,26 +12,47 @@ export default {
   },
   data() {
     return {
-      style: `width: ${this.$props.width}px; height: ${this.$props.width}px; filter: blur(${this.$props.width / 4 }px); border-radius: ${this.$props.width / 2}px; `
-    }
+      style: `width: ${this.$props.width}px; height: ${
+        this.$props.width
+      }px; filter: blur(${this.$props.width / 4}px); border-radius: ${
+        this.$props.width / 2
+      }px; `,
+    };
   },
   watch: {
     width: function () {
-      this.style = `width: ${this.$props.width}px; height: ${this.$props.width}px; filter: blur(${this.$props.width / 4}px); border-radius: ${this.$props.width / 2}px; `
-    }
-  }
-
-}
+      this.style = `width: ${this.$props.width}px; height: ${
+        this.$props.width
+      }px; filter: blur(${this.$props.width / 4}px); border-radius: ${
+        this.$props.width / 2
+      }px; `;
+    },
+  },
+};
 </script>
 
 <style scoped>
 .round {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 35%;
   transform: translate(-50%, -50%);
   z-index: 0;
   display: block;
-  background: rgba(255, 0, 0, 0.40);
+  background: rgba(255, 0, 0, 0.4);
+
+  animation: pulseAnim 10s infinite;
+}
+
+@keyframes pulseAnim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

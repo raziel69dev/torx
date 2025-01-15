@@ -26,7 +26,7 @@
     <div class="buttons">
       <button-red
         v-show="cart.items.length > 0"
-        :href="`https://ptech.ru`"
+        @click="emits('checkoutStep')"
         style="width: 100%"
       >
         Заказать
@@ -37,6 +37,8 @@
 <script setup>
 import { cart, removeFromCart } from "@/js/cart";
 import ButtonRed from "../TemplateParts/ButtonRed.vue";
+
+const emits = defineEmits(["checkoutStep"]);
 </script>
 <style lang="scss" scoped>
 .cart {

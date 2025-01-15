@@ -19,8 +19,9 @@ const props = defineProps({
   padding: 10px 40px;
   color: #fff;
   font-family: "Gotham Pro";
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
+  white-space: nowrap;
   font-weight: 400;
   line-height: normal;
 }

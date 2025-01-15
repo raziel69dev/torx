@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from "vue-router";
-import { defineAsyncComponent, onMounted, ref } from "vue";
+import { defineAsyncComponent, onMounted, ref, shallowRef } from "vue";
 import PromoText from "@/Layout/TemplateParts/PromoText.vue";
 import ScrollBox from "@/Layout/TemplateParts/ScrollBox.vue";
 import Models from "@/Layout/TemplateParts/Models.vue";
@@ -12,9 +12,13 @@ import BaseSlider from "@/Layout/TemplateParts/BaseSlider.vue";
 import { cart } from "./js/cart";
 import ThePopup from "./Layout/Popups/ThePopup.vue";
 import Cart from "./Layout/Popups/Cart.vue";
+import TheContacts from "./Layout/TemplateParts/TheContacts.vue";
+import UserForm from "@/Layout/Popups/UserForm.vue";
+import SendSuccess from "@/Layout/Popups/SendSuccess.vue";
 
 const popup = ref({
   show: false,
+  component: shallowRef(Cart),
 });
 
 onMounted(() => {
@@ -45,12 +49,19 @@ onMounted(() => {
       <Models id="models" />
       <Presentation id="about" />
       <WhereToBuy />
+      <TheContacts />
       <TheBlurRound :width="100" />
     </section>
-    <div class="cart-fixed" v-if="cart.items.length >= 1">
+    <div
+      class="cart-fixed"
+      v-if="cart.items.length >= 1"
+      @click="
+        popup.show = true;
+        popup.component = shallowRef(Cart);
+      "
+    >
       <span class="counter">{{ cart.items.length }}</span>
       <svg
-        @click="popup.show = true"
         xmlns="http://www.w3.org/2000/svg"
         width="22"
         height="24"
@@ -67,7 +78,11 @@ onMounted(() => {
     </div>
 
     <the-popup v-if="popup.show" @closePopup="popup.show = false">
-      <cart />
+      <component
+        :is="popup.component"
+        @checkout-step="popup.component = shallowRef(UserForm)"
+        @success-step="popup.component = shallowRef(SendSuccess)"
+      ></component>
     </the-popup>
 
     <notifications position="bottom right" />
@@ -83,8 +98,20 @@ onMounted(() => {
   padding: 10px;
   margin: 0 auto;
   box-sizing: border-box;
+  padding-top: 50px;
 }
-
+header {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  max-width: 1400px;
+  padding: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background-color: #000;
+  border-radius: 10px;
+}
 .cart-fixed {
   position: fixed;
   right: 30px;

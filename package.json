@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@kyvg/vue3-notification": "^3.4.1",
+    "axios": "^1.7.9",
+    "maska": "^3.0.4",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
-    "vue3-smooth-scroll": "^0.8.1"
+    "vue3-smooth-scroll": "^0.8.1",
+    "vue3-toastify": "^0.2.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",

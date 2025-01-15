@@ -75,3 +75,11 @@ h2 {
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
+
+@media screen and (max-width: 500px) {
+  body {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+}

@@ -34,7 +34,7 @@ function setModel(model) {
   console.log(model, activeModel);
 }
 onMounted(() => {
-  setModel(models[0]);
+  setModel(models[2]);
 });
 </script>
 <style lang="scss" scoped>

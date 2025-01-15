@@ -86,7 +86,7 @@ export default {
   .promo-spinner {
     position: absolute;
     left: 50%;
-    top: 15%;
+    top: 50%;
     width: 500px;
     height: 500px;
     border-radius: 500px;

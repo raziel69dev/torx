@@ -89,10 +89,12 @@ import { useRouter } from "vue-router";
     right: 10%;
     position: absolute;
     float: right;
-    top: -50%;
+    top: 50%;
     z-index: 30;
+    transform: translateY(-50%);
 
     img {
+      transition: 0.3s ease;
     }
     .link {
       position: absolute;
@@ -114,6 +116,9 @@ import { useRouter } from "vue-router";
     }
 
     &:hover {
+      img {
+        filter: brightness(0.7);
+      }
       .link {
         opacity: 1;
       }
@@ -138,9 +143,7 @@ import { useRouter } from "vue-router";
       }
     }
     .preview {
-      margin-top: 50px;
-      position: relative;
-      left: -5%;
+      display: none;
     }
   }
 }

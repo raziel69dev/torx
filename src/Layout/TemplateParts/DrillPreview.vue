@@ -77,14 +77,16 @@ import { reactive, shallowRef } from "vue";
 import ModelInfo from "@/Layout/Popups/ModelInfo.vue";
 import BuyModel from "../Popups/BuyModel.vue";
 
-import { useNotification } from "@kyvg/vue3-notification";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
-const { notify } = useNotification();
-
-notify({
-  title: "Authorization",
-  text: "You have been logged in!",
-});
+const notify = (modelName) => {
+  toast(`Товар ${modelName} добавлен в корзину`, {
+    theme: "dark",
+    type: "default",
+    autoClose: 2000,
+  }); // ToastOptions
+};
 
 const props = defineProps({
   model: null,
@@ -97,18 +99,22 @@ const popup = reactive({
 });
 
 const buyDrill = (model) => {
-  // if (localStorage.getItem("userCart")) {
-  //   try {
-  //     parseInt(cart.items.find((item) => item.model === model.model).count++);
-  //     localStorage.setItem("userCart", JSON.stringify(cart.items));
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // } else {
-  //   model.count = 1;
-  //   cart.items.push(model);
-  //   localStorage.setItem("userCart", JSON.stringify(cart.items));
-  // }
+  if (localStorage.getItem("userCart")) {
+    try {
+      parseInt(cart.items.find((item) => item.model === model.model).count++);
+      localStorage.setItem("userCart", JSON.stringify(cart.items));
+    } catch (err) {
+      model.count = 1;
+      cart.items.push(model);
+      localStorage.setItem("userCart", JSON.stringify(cart.items));
+    }
+  } else {
+    model.count = 1;
+    cart.items.push(model);
+    localStorage.setItem("userCart", JSON.stringify(cart.items));
+  }
+
+  notify(model.model);
 };
 </script>
 
@@ -233,7 +239,7 @@ const buyDrill = (model) => {
   display: flex;
   align-items: end;
   justify-content: center;
-  z-index: 2222;
+  z-index: 22;
 
   img {
     margin-left: 30px;

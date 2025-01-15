@@ -15,6 +15,7 @@ app.mount('#app')
 
 if (localStorage.getItem('userCart')) {
     cart.items = JSON.parse(localStorage.getItem('userCart'))
+    console.log(cart.items)
 }
 
 
