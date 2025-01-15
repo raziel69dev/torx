@@ -13,6 +13,7 @@
           {{ model.model }}
         </span>
       </div>
+
       <transition-group class="tabs-body" tag="div">
         <DrillPreview :model="activeModel.model" />
       </transition-group>
