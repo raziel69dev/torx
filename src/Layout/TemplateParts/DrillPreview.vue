@@ -54,17 +54,19 @@
       </div>
     </div>
 
-    <div class="op5">
+    <!-- <div class="op5">
       <the-blur-round :width="320" />
-    </div>
+    </div> -->
 
-    <the-popup v-if="popup.show" @closePopup="popup.show = false">
-      <component
-        :is="popup.component"
-        :data="(popup.content = $props.model)"
-        @closePopup="popup.show = false"
-      />
-    </the-popup>
+    <teleport to="body">
+      <the-popup v-if="popup.show" @closePopup="popup.show = false">
+        <component
+          :is="popup.component"
+          :data="(popup.content = $props.model)"
+          @closePopup="popup.show = false"
+        />
+      </the-popup>
+    </teleport>
   </div>
 </template>
 <script setup>
@@ -301,6 +303,7 @@ const buyDrill = (model) => {
 
   .drill-wrapper {
     flex-wrap: wrap;
+    width: 100%;
   }
   .drill-content {
     width: 100%;
@@ -313,14 +316,14 @@ const buyDrill = (model) => {
         display: none;
       }
       .feature {
-        height: 70px;
-        border-radius: 10px;
+        height: 90px;
+        border-radius: 15px;
         .name {
-          font-size: 10px;
-          margin-top: -5px;
+          font-size: 14px;
+          margin-top: -8px;
         }
         .tech {
-          font-size: 22px;
+          font-size: 26px;
         }
       }
     }

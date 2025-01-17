@@ -57,8 +57,9 @@
 </template>
 
 <script>
-import slide1 from "@/assets/images/slide2.jpg";
-import slide2 from "@/assets/images/new_old_torx.jpg";
+import slide1 from "@/assets/images/slide1.jpg";
+import slide2 from "@/assets/images/slide1.jpg";
+
 export default {
   name: "BaseSlider.vue",
   data() {
@@ -66,6 +67,7 @@ export default {
       slides: [slide1, slide2],
       step: 0,
       styles: ``,
+      autoplay: 3000,
     };
   },
   methods: {
@@ -89,10 +91,19 @@ export default {
       } else if (this.step < this.slides.length) {
         this.step--;
       }
-
       const wrapperWidth = this.$refs.slider.clientWidth;
       this.styles = `transform: translateX(-${wrapperWidth * this.step}px);`;
     },
+    autoplaySlider() {
+      this.autoplay = setInterval(() => this.next(), this.autoplay);
+    },
+    restartAutoplay() {
+      removeInterval(this.autoplay);
+      this.autoplay = setInterval(() => this.next(), 5000);
+    },
+  },
+  mounted() {
+    this.autoplaySlider();
   },
 };
 </script>

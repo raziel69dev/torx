@@ -129,8 +129,16 @@ export default {
   .promo-text {
     z-index: 30;
     position: relative;
-    .promo-text_description p {
-      font-size: 14px;
+    flex-wrap: wrap;
+    .promo-text_description {
+      width: 100%;
+      p {
+        font-size: 14px;
+      }
+    }
+    .promo-text_icon {
+      width: 100%;
+      margin-top: 20px;
     }
     .promo-spinner {
       width: 180px;

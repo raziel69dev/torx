@@ -19,6 +19,20 @@
         </div>
         <div
           class="input-wrapper"
+          @click="input.city.translated = true"
+          :class="{ translated: input.city.translated || input.city.data.length > 0 }"
+        >
+          <input
+            type="text"
+            id="name"
+            v-model="input.city.data"
+            :class="{ error: input.city.error }"
+          />
+          <label for="name">Город</label>
+          <span class="err" v-if="input.city.error">Введите город</span>
+        </div>
+        <div
+          class="input-wrapper"
           @click="input.phone.translated = true"
           :class="{ translated: input.phone.translated || input.phone.data.length > 0 }"
         >
@@ -58,6 +72,11 @@ const input = reactive({
     translated: false,
     error: false,
   },
+  city: {
+    data: "",
+    translated: false,
+    error: false,
+  },
 });
 
 const router = useRouter();
@@ -65,22 +84,32 @@ const emits = defineEmits(["successStep"]);
 const makeMessage = () => {
   input.name.error = false;
   input.phone.error = false;
-  if (input.name.data.length > 3 && input.phone.data.length > 16) {
+  input.city.error = false;
+
+  if (input.name.data.length <= 0) {
+    input.name.error = true;
+    console.log("name error");
+  } else if (input.city.data.length <= 0) {
+    input.city.error = true;
+    console.log("phone error");
+  } else if (input.phone.data.length <= 16) {
+    input.phone.error = true;
+    console.log("city error");
+  } else {
+    console.log(12);
     let order = "";
     for (const model of cart.items) {
       console.log(model);
-      model.name ? (order += model.model + ", " + model.count + "шт. \n") : null;
+      model.name
+        ? (order += model.model + ", " + model.sku + ", " + model.count + "шт. \n")
+        : null;
     }
-    const text = `Имя: ${input.name.data}, \nТелефон: ${input.phone.data} , \nЗаказ: ${order}`;
+    const text = `Имя: ${input.name.data}, \nТелефон: ${input.phone.data} , \Город: ${input.city.data} , \nЗаказ: ${order}`;
     sendMessage(text);
     emits("successStep");
 
     cart.items.splice(0, cart.items.length);
     localStorage.removeItem("userCart");
-  } else if (input.name.data.length <= 3) {
-    input.name.error = true;
-  } else if (input.phone.data.length <= 16) {
-    input.phone.error = true;
   }
 };
 </script>
@@ -136,5 +165,7 @@ const makeMessage = () => {
       top: 0;
     }
   }
+}
+@media screen and (max-width: 500px) {
 }
 </style>

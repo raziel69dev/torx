@@ -35,9 +35,9 @@ export default {
 .round {
   position: absolute;
   top: 50%;
-  left: 35%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;
+  z-index: -1;
   display: block;
   background: rgba(255, 0, 0, 0.4);
 

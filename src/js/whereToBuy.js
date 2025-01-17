@@ -11,13 +11,14 @@ export const whereToBuy = reactive([
         logo: torx,
         when: 'Уже доступно',
         isDisabled: false,
-        link: '#models'
+        link: '#models',
+        type: 'internal'
     },
     {
         logo: ptech,
-        when: 'Скоро',
-        isDisabled: true,
-        link: null,
+        when: 'Уже доступно',
+        isDisabled: false,
+        link: 'https://ptech.ru/news/novinki-shurupovertov-torx/',
     },
     {
         logo: ozon,

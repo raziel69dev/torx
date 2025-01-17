@@ -1,6 +1,6 @@
 <template>
   <div class="models-wrapper">
-    <h2>модели шуруповертов</h2>
+    <h2>Модели шуруповертов</h2>
     <div class="tabs" v-if="activeModel.model">
       <div class="tabs-header">
         <span
@@ -93,6 +93,9 @@ h2 {
 @media screen and (max-width: 500px) {
   h2 {
     font-size: 22px;
+  }
+  .models-wrapper {
+    margin-top: 50px;
   }
 }
 </style>

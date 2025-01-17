@@ -5,6 +5,7 @@ export const cart = reactive({
 })
 
 export function addToCart(model) {
+    
     const findModel = cart.items.find(item => item.name === model.name) || null
     
     if (findModel) {
@@ -18,10 +19,10 @@ export function addToCart(model) {
         cart.items.push(model)
     }
     
-    localStorage.setItem('cart', JSON.stringify(cart))
+    localStorage.setItem('userCart', JSON.stringify(cart))
 }
 
 export function removeFromCart(index) {
     cart.items.splice(index, 1)
-    localStorage.setItem('cart', JSON.stringify(cart))
+    localStorage.setItem('userCart', JSON.stringify(cart))
 }

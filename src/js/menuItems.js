@@ -6,8 +6,16 @@ export const menuItems = reactive([
         href: '#promo',
         active: false
     },{
+        name: 'преимущества',
+        href: '#features',
+        active: false
+    },{
         name: 'модели',
         href: '#models',
+        active: false
+    },{
+        name: 'комплектации',
+        href: '#packs',
         active: false
     },{
         name: 'о TORX',

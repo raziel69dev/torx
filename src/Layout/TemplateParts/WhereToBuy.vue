@@ -8,7 +8,8 @@
           <div class="when">{{ logo.when }}</div>
           <button-red
             :disabled="logo.isDisabled"
-            @click="router.push(logo.link)"
+            :href="logo.link"
+            :hrefType="logo.type"
             style="width: 100%"
             :class="{ disabled: logo.isDisabled }"
           >
@@ -68,5 +69,11 @@ const router = useRouter();
   }
 }
 @media screen and (max-width: 500px) {
+  .where-to-buy {
+    flex-wrap: wrap;
+    .card {
+      width: 100%;
+    }
+  }
 }
 </style>

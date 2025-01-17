@@ -129,6 +129,7 @@ import { useRouter } from "vue-router";
 @media screen and (max-width: 500px) {
   .presentation {
     width: 100%;
+    margin-top: 40px;
 
     .text {
       width: 100%;

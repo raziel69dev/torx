@@ -1,6 +1,6 @@
 <script setup>
 import { RouterView } from "vue-router";
-import { defineAsyncComponent, onMounted, ref, shallowRef } from "vue";
+import { defineAsyncComponent, onMounted, reactive, ref, shallowRef } from "vue";
 import PromoText from "@/Layout/TemplateParts/PromoText.vue";
 import ScrollBox from "@/Layout/TemplateParts/ScrollBox.vue";
 import Models from "@/Layout/TemplateParts/Models.vue";
@@ -15,11 +15,25 @@ import Cart from "./Layout/Popups/Cart.vue";
 import TheContacts from "./Layout/TemplateParts/TheContacts.vue";
 import UserForm from "@/Layout/Popups/UserForm.vue";
 import SendSuccess from "@/Layout/Popups/SendSuccess.vue";
-
+import DrillFeatures from "./Layout/TemplateParts/DrillFeatures.vue";
+import PtechPlaform from "./Layout/TemplateParts/PtechPlaform.vue";
+import TorxPacks from "./Layout/TemplateParts/TorxPacks.vue";
+import video from "@/assets/Ver-6.2.webm";
+import poster from "@/assets/poster.jpg";
 const popup = ref({
   show: false,
   component: shallowRef(Cart),
 });
+
+const videoBox = ref(null);
+const playButton = reactive({
+  show: true,
+});
+
+const playVideo = () => {
+  videoBox.value.play();
+  playButton.show = false;
+};
 
 onMounted(() => {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -41,13 +55,46 @@ onMounted(() => {
     </header>
     <section style="position: relative">
       <BaseSlider id="promo" />
-      <TheBlurRound :width="400" />
+      <TheBlurRound :width="100" />
       <PromoText />
-      <ScrollBox />
+      <!-- <ScrollBox /> -->
     </section>
-    <section>
+    <section style="margin-top: 80px">
+      <DrillFeatures id="features" />
+      <div id="video">
+        <button class="play" @click="playVideo()" v-show="playButton.show">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 22 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8.5 7.96533C8.5 7.48805 8.5 7.24941 8.59974 7.11618C8.68666 7.00007 8.81971 6.92744 8.96438 6.9171C9.13038 6.90525 9.33112 7.03429 9.73261 7.29239L14.4532 10.3271C14.8016 10.551 14.9758 10.663 15.0359 10.8054C15.0885 10.9298 15.0885 11.0702 15.0359 11.1946C14.9758 11.337 14.8016 11.449 14.4532 11.6729L9.73261 14.7076C9.33112 14.9657 9.13038 15.0948 8.96438 15.0829C8.81971 15.0726 8.68666 14.9999 8.59974 14.8838C8.5 14.7506 8.5 14.512 8.5 14.0347V7.96533Z"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <video ref="videoBox" controls loop="false" preload="none" :poster="poster">
+          <source :src="video" type="video/webm" />
+        </video>
+      </div>
       <Models id="models" />
+
+      <TorxPacks id="packs" />
       <Presentation id="about" />
+      <PtechPlaform id="platform" />
       <WhereToBuy />
       <TheContacts />
       <TheBlurRound :width="100" />
@@ -102,7 +149,7 @@ onMounted(() => {
 }
 header {
   position: fixed;
-  top: 10px;
+  top: 0;
   width: 100%;
   max-width: 1400px;
   padding: 20px;
@@ -111,6 +158,31 @@ header {
   z-index: 500;
   background-color: #000;
   border-radius: 10px;
+}
+#video {
+  margin-top: 40px;
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    cursor: pointer;
+    translate: -50% -50%;
+    svg {
+      width: 90px;
+
+      height: 90px;
+      path {
+        stroke: #fff;
+      }
+    }
+  }
+  video {
+    width: 100%;
+    border-radius: 20px;
+  }
 }
 .cart-fixed {
   position: fixed;
@@ -140,7 +212,13 @@ header {
   .content {
     margin: 0;
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+  }
+  header {
+    top: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
   }
 }
 </style>

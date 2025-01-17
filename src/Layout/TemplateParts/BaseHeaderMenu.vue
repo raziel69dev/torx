@@ -1,10 +1,12 @@
 <template>
   <nav>
     <div class="menu-item">
-      <MenuItem v-for="item of menuItems" :key="item" :link="item" />
+      <div class="items">
+        <MenuItem v-for="item of menuItems" :key="item" :link="item" />
+      </div>
 
       <div class="icons">
-        <span class="counter">{{ cart.items.length }}</span>
+        <span class="counter" @click="popup.show = true">{{ cart.items.length }}</span>
         <svg
           @click="popup.show = true"
           xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +41,11 @@
         </a>
       </div>
     </div>
-    <the-popup v-if="popup.show" @closePopup="popup.show = false">
-      <cart />
-    </the-popup>
+    <teleport to="main">
+      <the-popup v-if="popup.show" @closePopup="popup.show = false">
+        <cart />
+      </the-popup>
+    </teleport>
   </nav>
 </template>
 
@@ -77,6 +81,8 @@ export default {
 .menu-item {
   display: flex;
   gap: 25px;
+  justify-content: end;
+  align-items: center;
 }
 
 .icons {
@@ -96,6 +102,7 @@ export default {
     background-color: red;
     padding: 2px 5px;
     border-radius: 20px;
+    cursor: pointer;
   }
 
   svg {
@@ -108,6 +115,16 @@ export default {
         stroke: #e7e7e7;
       }
     }
+  }
+}
+.items {
+  display: flex;
+  gap: 20px;
+  white-space: nowrap;
+}
+@media screen and (max-width: 500px) {
+  .items {
+    display: none;
   }
 }
 </style>

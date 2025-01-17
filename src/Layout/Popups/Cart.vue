@@ -14,13 +14,22 @@
         <div class="item-photo">
           <img :src="item.image" alt="" />
         </div>
-        <div class="counter">x{{ item.count || 1 }}</div>
-        <button-gray
-          @click="removeFromCart(index)"
-          style="cursor: pointer; font-size: 12px"
-        >
-          Убрать
-        </button-gray>
+
+        <div class="counter">
+          <button-gray
+            @click="changeQuantity('remove', item, index)"
+            style="cursor: pointer; font-size: 12px"
+          >
+            -
+          </button-gray>
+          <div class="count">{{ item.count || 1 }}</div>
+          <button-gray
+            @click="changeQuantity('add', item)"
+            style="cursor: pointer; font-size: 12px"
+          >
+            +
+          </button-gray>
+        </div>
       </div>
     </div>
     <div class="buttons">
@@ -39,6 +48,20 @@ import { cart, removeFromCart } from "@/js/cart";
 import ButtonRed from "../TemplateParts/ButtonRed.vue";
 
 const emits = defineEmits(["checkoutStep"]);
+
+const changeQuantity = (direction, item, index) => {
+  if (direction === "add") {
+    item.count++;
+  } else {
+    if (item.count === 1) {
+      removeFromCart(index);
+    } else {
+      item.count--;
+    }
+  }
+
+  localStorage.setItem("userCart", JSON.stringify(cart.items));
+};
 </script>
 <style lang="scss" scoped>
 .cart {
@@ -50,6 +73,7 @@ const emits = defineEmits(["checkoutStep"]);
     display: flex;
     gap: 30px;
     align-items: center;
+    width: 100%;
   }
 
   .cart-heading {
@@ -61,6 +85,7 @@ const emits = defineEmits(["checkoutStep"]);
     font-weight: 700;
     margin-bottom: 30px;
     line-height: normal;
+    text-align: center;
   }
   .cart-body {
     width: 100%;
@@ -68,9 +93,15 @@ const emits = defineEmits(["checkoutStep"]);
     gap: 30px;
     flex-wrap: wrap;
     position: relative;
+    max-height: 70vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    justify-content: space-around;
 
     .cart-item {
       width: 30%;
+      display: flex;
+      flex-wrap: wrap;
 
       .item-name {
         color: #fff;
@@ -79,8 +110,11 @@ const emits = defineEmits(["checkoutStep"]);
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        text-align: center;
       }
       .item-photo {
+        margin-top: 10px;
+        margin-bottom: 10px;
         img {
           width: 100%;
         }
@@ -88,14 +122,18 @@ const emits = defineEmits(["checkoutStep"]);
       .counter {
         background-color: red;
         display: flex;
-        width: 30px;
+        width: 120px;
         align-items: center;
         justify-content: center;
         height: 30px;
         border-radius: 20px;
-        position: absolute;
-        top: 160px;
+        margin-top: 5px;
         margin-left: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding: 0 20px;
       }
     }
   }
@@ -110,6 +148,9 @@ const emits = defineEmits(["checkoutStep"]);
       .cart-item {
         width: 45%;
         box-sizing: border-box;
+        .counter {
+          margin: 0 auto;
+        }
         .item-name {
           font-size: 12px;
         }
