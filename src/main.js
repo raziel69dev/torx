@@ -11,6 +11,7 @@ const app = createApp(App)
 
 app.use(router, VueSmoothScroll, Notifications)
 
+// secret = 6LdXTL4qAAAAAHNnkYTsk8QDtOZwsp0kxrmbJZZn
 app.mount('#app')
 
 if (localStorage.getItem('userCart')) {

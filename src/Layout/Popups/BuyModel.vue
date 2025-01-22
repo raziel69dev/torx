@@ -2,7 +2,7 @@
   <div class="model-to-buy">
     <div class="model-name">{{ data.name }} {{ data.model }}</div>
     <div class="model-photo">
-      <img :src="data.image" alt="" />
+      <img :src="data.image" alt="" lazy />
     </div>
     <button-red
       @click="addToCart(data), emits('closePopup', true)"

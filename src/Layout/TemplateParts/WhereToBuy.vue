@@ -69,6 +69,9 @@ const router = useRouter();
   }
 }
 @media screen and (max-width: 500px) {
+  .where-to-buy_wrapper {
+    margin-top: 30px;
+  }
   .where-to-buy {
     flex-wrap: wrap;
     .card {

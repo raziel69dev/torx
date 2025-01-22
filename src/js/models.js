@@ -6,15 +6,15 @@ import gear from '@/components/icons/gear.svg'
 import speed from '@/components/icons/speed.svg'
 import battery from '@/components/icons/battery.svg'
 
-import cs12 from '@/assets/images/drills/cs12.png'
-import cd12 from '@/assets/images/drills/cd12.png'
-import cid21 from '@/assets/images/drills/cid21.png'
+import cs12 from '@/assets/images/drills/9310211.webp'
+import cd12 from '@/assets/images/drills/9310212.webp'
+import cid21 from '@/assets/images/drills/9310411.webp'
 
-import cd12tc from '@/assets/images/drillpacks/9310215F.png'
-import cd12acc from '@/assets/images/drillpacks/9310214E.png'
-import cd12c from '@/assets/images/drillpacks/9310213F.png'
-import cid21c from '@/assets/images/drillpacks/9310412E.png'
-import all from '@/assets/images/drillpacks/9310215Q.png'
+import cd12tc from '@/assets/images/drillpacks/9310215F.webp'
+import cd12acc from '@/assets/images/drillpacks/9310214E.webp'
+import cd12c from '@/assets/images/drillpacks/9310213F.webp'
+import cid21c from '@/assets/images/drillpacks/9310412E.webp'
+import all from '@/assets/images/drillpacks/9310215Q.webp'
 
 export const models = reactive([{
     model: 'CS-12',
@@ -148,7 +148,7 @@ export const models = reactive([{
             icon: speed
         },
         battery: {
-            tech: 1.5,
+            tech: 2.0,
             name: 'mAh',
             icon: battery
         }

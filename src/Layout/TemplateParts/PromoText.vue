@@ -34,7 +34,7 @@
       </svg>
     </div>
     <div class="promo-text_icon">
-      <img :src="torxAiIcon" alt="AI" />
+      <img :src="torxAiIcon" alt="AI" lazy />
     </div>
   </div>
 </template>

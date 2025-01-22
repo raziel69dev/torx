@@ -45,21 +45,38 @@
           />
           <label for="tel">Ваш телефон</label>
           <span class="err" v-if="input.phone.error">Не верный номер телефона</span>
+          <span class="err" v-if="input.robot.error">Пройдите капчу</span>
         </div>
       </div>
+
+      <vue-recaptcha
+        v-show="true"
+        sitekey="6Lc-W74qAAAAALbus2qD_5EDLNlg6HGEgp4TP0xv"
+        size="normal"
+        theme="dark"
+        hl="ru"
+        :loading-timeout="30000"
+        @verify="input.robot.isRobot = false"
+        @fail="input.robot.isRobot = true"
+        @error="input.robot.isRobot = false"
+      />
     </form>
-    <div class="buttons" @click="makeMessage()">
-      <button-red> Оформить </button-red>
+    <div class="buttons">
+      <button-red style="width: 100%" @click="makeMessage()" :animate="true">
+        Оформить
+      </button-red>
     </div>
   </div>
 </template>
 <script setup>
 import ButtonRed from "@/Layout/TemplateParts/ButtonRed.vue";
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { vMaska } from "maska/vue";
 import { sendMessage } from "@/js/tgbell.js";
 import { cart } from "@/js/cart.js";
 import { useRouter } from "vue-router";
+
+import vueRecaptcha from "vue3-recaptcha2";
 
 const input = reactive({
   name: {
@@ -77,6 +94,10 @@ const input = reactive({
     translated: false,
     error: false,
   },
+  robot: {
+    isRobot: true,
+    error: false,
+  },
 });
 
 const router = useRouter();
@@ -85,16 +106,16 @@ const makeMessage = () => {
   input.name.error = false;
   input.phone.error = false;
   input.city.error = false;
+  input.robot.error = false;
 
   if (input.name.data.length <= 0) {
     input.name.error = true;
-    console.log("name error");
   } else if (input.city.data.length <= 0) {
     input.city.error = true;
-    console.log("phone error");
   } else if (input.phone.data.length <= 16) {
     input.phone.error = true;
-    console.log("city error");
+  } else if (input.robot.isRobot) {
+    input.robot.error = true;
   } else {
     console.log(12);
     let order = "";
@@ -104,7 +125,7 @@ const makeMessage = () => {
         ? (order += model.model + ", " + model.sku + ", " + model.count + "шт. \n")
         : null;
     }
-    const text = `Имя: ${input.name.data}, \nТелефон: ${input.phone.data} , \Город: ${input.city.data} , \nЗаказ: ${order}`;
+    const text = `Имя: ${input.name.data}, \nТелефон: ${input.phone.data} , \nГород: ${input.city.data} , \nЗаказ: ${order}`;
     sendMessage(text);
     emits("successStep");
 
@@ -167,5 +188,15 @@ const makeMessage = () => {
   }
 }
 @media screen and (max-width: 500px) {
+  h2 {
+    font-size: 25px;
+  }
+  .user-form {
+    flex-wrap: wrap;
+  }
+  .col {
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }
 </style>

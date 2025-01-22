@@ -3,7 +3,9 @@
     <div class="slider-wrapper noselect">
       <div class="slider" ref="slider" :style="styles">
         <div class="slide" @drag="onDrag" v-for="slide of slides" :key="slide">
-          <img :src="slide" alt="" />
+          <a :href="slide.link">
+            <img :src="slide.image" alt="" lazy />
+          </a>
         </div>
       </div>
     </div>
@@ -58,23 +60,29 @@
 
 <script>
 import slide1 from "@/assets/images/slide1.jpg";
-import slide2 from "@/assets/images/slide1.jpg";
+import slide2 from "@/assets/images/slide2.jpg";
 
 export default {
   name: "BaseSlider.vue",
   data() {
     return {
-      slides: [slide1, slide2],
+      slides: [
+        {
+          image: slide1,
+          link: null,
+        },
+        {
+          image: slide2,
+          link: "https://ptech.ru",
+        },
+      ],
       step: 0,
       styles: ``,
-      autoplay: 3000,
+      autoplay: 8000,
     };
   },
   methods: {
-    onDrag(e) {
-      console.log(1);
-      console.log(e);
-    },
+    onDrag(e) {},
     next() {
       if (this.step === this.slides.length - 1) {
         this.step = 0;

@@ -4,7 +4,9 @@
       <router-link to="#promo">
         <TheLogotype />
       </router-link>
-      <button-red href="#video" hrefType="internal"> Смотрите видео </button-red>
+      <button-red href="#video" hrefType="internal" :animate="true">
+        Смотрите видео
+      </button-red>
     </div>
 
     <div class="menu">

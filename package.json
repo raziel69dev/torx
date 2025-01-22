@@ -13,7 +13,9 @@
     "axios": "^1.7.9",
     "maska": "^3.0.4",
     "vue": "^3.4.29",
+    "vue-recaptcha": "^3.0.0-alpha.6",
     "vue-router": "^4.3.3",
+    "vue3-recaptcha2": "^1.8.0",
     "vue3-smooth-scroll": "^0.8.1",
     "vue3-toastify": "^0.2.8"
   },

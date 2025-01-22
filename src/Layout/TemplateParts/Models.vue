@@ -6,16 +6,29 @@
         <span
           class="model-name"
           :class="{ active: activeModel.model.name === model.name }"
-          v-for="model of models"
+          v-for="(model, index) of models"
           :key="model"
-          @click="setModel(model)"
+          @click="setModel(model, index)"
         >
           {{ model.model }}
         </span>
       </div>
 
-      <transition-group class="tabs-body" tag="div">
-        <DrillPreview :model="activeModel.model" />
+      <transition-group
+        class="tabs-body"
+        tag="div"
+        :class="{ animation: activeModel.animation }"
+      >
+        <DrillPreview
+          :model="activeModel.model"
+          @touchstart="
+            (e) => {
+              slider.initialPos = e.targetTouches[0].screenX;
+              slider.slided = false;
+            }
+          "
+          @touchmove="(e) => slideMobile(e)"
+        />
       </transition-group>
     </div>
   </div>
@@ -27,15 +40,53 @@ import { models } from "@/js/models";
 
 const activeModel = reactive({
   model: null,
+  index: null,
+  animation: false,
 });
-
-function setModel(model) {
+const slider = reactive({
+  initialPos: null,
+  slided: false,
+});
+function setModel(model, index) {
   activeModel.model = model;
-  //swap models code here
-  console.log(model, activeModel);
+  activeModel.index = index;
 }
+const slideMobile = (e) => {
+  if (
+    e.targetTouches[0].screenX < slider.initialPos - 100 &&
+    !slider.slided &&
+    activeModel.index < models.length - 1
+  ) {
+    setAnimation();
+    setTimeout(() => {
+      setModel(models[activeModel.index + 1], activeModel.index + 1);
+    }, 100);
+
+    slider.slided = true;
+    slider.initialPos = 0;
+  } else if (
+    e.targetTouches[0].screenX > slider.initialPos + 100 &&
+    !slider.slided &&
+    activeModel.index > 0
+  ) {
+    setAnimation();
+    setTimeout(() => {
+      setModel(models[activeModel.index - 1], activeModel.index - 1);
+    }, 100);
+
+    slider.slided = true;
+    slider.initialPos = 0;
+  }
+};
+
+const setAnimation = () => {
+  activeModel.animation = true;
+  setTimeout(() => {
+    activeModel.animation = false;
+  }, 300);
+};
 onMounted(() => {
-  setModel(models[2]);
+  setModel(models[2], 2);
 });
 </script>
 <style lang="scss" scoped>
@@ -58,13 +109,14 @@ h2 {
   opacity: 0;
 }
 .tabs {
+  margin-top: 50px;
   .tabs-header {
     color: #ffffff;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    border-bottom: 1px solid #434343;
+    border-bottom: 2px solid #434343;
 
     .model-name {
       position: relative;
@@ -79,14 +131,28 @@ h2 {
       border-bottom: 3px solid transparent;
       transition: 0.3s ease;
       cursor: pointer;
+      border-radius: 20px 20px 0 0;
+      box-sizing: border-box;
+      padding: 10px 20px;
+      z-index: 5;
+      border: 2px solid transparent;
 
       &.active {
-        border-bottom-color: #ff0000;
+        color: red;
+        border: 2px solid #434343;
+        border-bottom: 2px solid #121212;
       }
     }
   }
   .tabs-body {
     margin-top: 40px;
+    transition: 0.3s ease;
+    width: 100%;
+    overflow: hidden;
+
+    &.animation {
+      transform: scale(0.8);
+    }
   }
 }
 

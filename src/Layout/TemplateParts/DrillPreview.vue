@@ -30,8 +30,10 @@
         </div>
       </div>
 
-      <div class="buttons" style="margin-top: 20px; display: flex; gap: 20px">
-        <ButtonRed @buttonClicked="buyDrill($props.model)"> купить </ButtonRed>
+      <div class="buttons" style="margin-top: 40px; display: flex; gap: 20px">
+        <ButtonRed @buttonClicked="buyDrill($props.model)" :animate="true">
+          купить
+        </ButtonRed>
         <ButtonGray
           @click="
             (popup.show = true),
@@ -132,7 +134,7 @@ const buyDrill = (model) => {
   width: 80%;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 30px auto 0;
 }
 .drill-content {
   color: #ffffff;
@@ -245,6 +247,7 @@ const buyDrill = (model) => {
 
   img {
     margin-left: 30px;
+    max-width: 90%;
   }
 
   .colors {
@@ -272,7 +275,19 @@ const buyDrill = (model) => {
     }
   }
 }
+.drill-advanced {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  padding-top: 20px;
 
+  .advanced {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+}
 .slogan {
   width: 100%;
   display: flex;

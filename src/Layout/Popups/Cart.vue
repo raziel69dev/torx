@@ -12,7 +12,7 @@
       >
         <div class="item-name">{{ item.name }} {{ item.model }}</div>
         <div class="item-photo">
-          <img :src="item.image" alt="" />
+          <img :src="item.image" alt="" lazy />
         </div>
 
         <div class="counter">

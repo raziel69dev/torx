@@ -1,9 +1,19 @@
 <template>
-  <button v-if="!props.href" class="btn button-buy" @click="$emit('buttonClicked')">
+  <button
+    v-if="!props.href"
+    class="btn button-buy"
+    @click="$emit('buttonClicked')"
+    :class="{ animate: animate }"
+  >
     <slot />
   </button>
 
-  <a v-else-if="hrefType === 'internal'" class="btn button-buy" :href="href">
+  <a
+    v-else-if="hrefType === 'internal'"
+    class="btn button-buy"
+    :href="href"
+    :class="{ animate: animate }"
+  >
     <slot />
   </a>
 
@@ -15,6 +25,7 @@
 const props = defineProps({
   href: null,
   hrefType: "external",
+  animate: false,
 });
 </script>
 
@@ -35,6 +46,23 @@ const props = defineProps({
   align-items: center;
   box-sizing: border-box;
   justify-content: center;
+
+  &.animate {
+    box-shadow: 0 0 10px red;
+    animation: pulse 2s ease infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px red;
+  }
+  50% {
+    box-shadow: 0 0 30px red;
+  }
+  100% {
+    box-shadow: 0 0 10px red;
+  }
 }
 
 @media screen and (max-width: 500px) {

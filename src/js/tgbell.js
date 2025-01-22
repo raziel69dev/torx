@@ -22,6 +22,12 @@ export function sendMessage(data) {
       
       fetch(`https://api.telegram.org/bot${settings.token}/sendMessage`, options)
       .then(res => res.json())
-      .then(res => console.log(res))
+      .then(res => {
+        fetch('./mailSender.php', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: data
+        }).then(res => console.log(res)).catch(err => console.log(err))
+      })
       .catch(err => console.error(err));
 }

@@ -18,7 +18,7 @@ import SendSuccess from "@/Layout/Popups/SendSuccess.vue";
 import DrillFeatures from "./Layout/TemplateParts/DrillFeatures.vue";
 import PtechPlaform from "./Layout/TemplateParts/PtechPlaform.vue";
 import TorxPacks from "./Layout/TemplateParts/TorxPacks.vue";
-import video from "@/assets/Ver-6.2.webm";
+import video from "@/assets/Ver-6.3.webm";
 import poster from "@/assets/poster.jpg";
 const popup = ref({
   show: false,
@@ -53,6 +53,7 @@ onMounted(() => {
     <header>
       <BaseHeader />
     </header>
+
     <section style="position: relative">
       <BaseSlider id="promo" />
       <TheBlurRound :width="100" />
@@ -99,6 +100,7 @@ onMounted(() => {
       <TheContacts />
       <TheBlurRound :width="100" />
     </section>
+
     <div
       class="cart-fixed"
       v-if="cart.items.length >= 1"

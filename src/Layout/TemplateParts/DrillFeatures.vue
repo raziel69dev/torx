@@ -24,7 +24,7 @@
   </div>
 </template>
 <script setup>
-import drill from "@/assets/images/drills/cd12.png";
+import drill from "@/assets/images/drills/9310212.webp";
 </script>
 <style lang="scss" scoped>
 .wrapper {
